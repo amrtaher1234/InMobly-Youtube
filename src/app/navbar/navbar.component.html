@@ -1,10 +1,18 @@
-<p>
-  navbar works!
-</p>
+
+<mat-toolbar color="accent">
 <mat-toolbar-row>
-  <span>
 <img src="http://www.inmobly.com/wp-content/uploads/2016/04/logo_Dark-1.png" alt="">
-</span>
   <span class="example-spacer"></span>
-  <mat-icon class="example-icon">verified_user</mat-icon>
+
+  <p>
+      <mat-form-field appearance="legacy">
+        <!-- <mat-label>Legacy form field</mat-label> -->
+        <!-- <mat-label><mat-icon>search</mat-icon></mat-label> -->
+        <mat-icon matSuffix>search</mat-icon>
+        <input matInput placeholder="search for video title">
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+    </p>
 </mat-toolbar-row>
+
+</mat-toolbar>
