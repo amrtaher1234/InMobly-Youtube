@@ -29,7 +29,7 @@ import { environment } from 'src/environments/environment';
     // firebase init.
     AngularFireModule.initializeApp(environment.config),
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
   ],
   providers: [],
   bootstrap: [AppComponent]
