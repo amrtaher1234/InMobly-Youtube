@@ -11,7 +11,8 @@ export const environment = {
     projectId: 'inmobly-ytube',
     storageBucket: 'inmobly-ytube.appspot.com',
     messagingSenderId: '897628957847'
-  }
+  },
+  youtubeAPI : 'AIzaSyBIxUDftgsBPWkib-g1j3N6hklOyShuKfc',
 };
 
 /*

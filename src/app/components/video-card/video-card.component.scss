@@ -1,0 +1,10 @@
+.video-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    // background: blue;
+}
+
+.title , .date  , button{
+    margin: auto;
+}

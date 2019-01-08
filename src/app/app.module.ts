@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ComponentsModule,
 
     // firebase init.
     AngularFireModule.initializeApp(environment.config),
