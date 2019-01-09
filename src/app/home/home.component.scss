@@ -32,3 +32,16 @@ button:focus{
     background: red !important;
     color: white;
 }
+
+@media screen and (max-width: 600px) {
+img {
+    width: 108px !important;
+    vertical-align: super;
+    margin-right: 10px;
+}
+table {
+    .mat-cell {
+        font-size: 11.3px !important;
+    }
+}
+}

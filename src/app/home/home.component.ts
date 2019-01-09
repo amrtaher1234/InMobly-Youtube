@@ -18,11 +18,14 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<Video>(null);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private router: Router , private databaseOps: DatabaseOperationsService , private youtube: YoutubeService) { }
+  Loading: boolean;
+  constructor(private router: Router , private databaseOps: DatabaseOperationsService , private youtube: YoutubeService) {
+    this.Loading = false;
+   }
 
   async ngOnInit() {
     let videos: Video[];
+    this.Loading = true;
     if (localStorage.getItem('data')) {
       console.log('true');
      videos = await this.databaseOps.getVideos({name : 'snippet.title' , orderType: EOrderType.asc});
@@ -32,6 +35,7 @@ export class HomeComponent implements OnInit {
     }
     this.dataSource = new MatTableDataSource<Video>(videos);
     this.dataSource.sort = this.sort;
+    this.Loading = false;
     this.dataSource.paginator = this.paginator;
   }
 

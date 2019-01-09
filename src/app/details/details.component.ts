@@ -15,10 +15,12 @@ export class DetailsComponent implements OnInit {
   rating: number;
   isFav: boolean;
   videoId: string;
+  Loading: boolean;
   constructor(private youtube: YoutubeService,
     private databaseOps: DatabaseOperationsService,
     private activeRoute: ActivatedRoute) {
-      this.rating = 3;
+      this.rating = 0;
+      this.Loading = false;
     }
 
   ngOnInit() {
