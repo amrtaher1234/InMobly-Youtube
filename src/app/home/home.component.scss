@@ -1,0 +1,34 @@
+
+table {
+    width: 100%;
+  }
+
+
+
+table {
+    font-family: Hind;
+    font-weight: 600;
+    // border-spacing: 25px !important;
+    th{
+        cursor: pointer;
+        font-weight: bold !important;
+        mat-icon{
+            vertical-align: sub;
+        }
+    }
+    tr:hover{
+        background: #f3f3f3;
+    }
+}
+img {
+    width: 185px !important;
+    vertical-align: super;
+}
+button{
+    width: 80px;
+}
+button:focus{
+    transition: background-color 0.7s linear;
+    background: red !important;
+    color: white;
+}

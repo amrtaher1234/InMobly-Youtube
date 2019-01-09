@@ -1,3 +1,36 @@
-<p>
-  details works!
-</p>
+<img class="favorite-img" *ngIf="isFav" src="http://files.softicons.com/download/social-media-icons/pretty-social-media-icons-2-by-custom-icon-design/png/256x256/Favorite.png" alt="">
+<div *ngIf="videoDetail" class="container-img"> 
+    <img mat-card-image src="{{videoDetail.items[0].snippet.thumbnails.maxres.url}}" alt="Photo of a Shiba Inu">
+  </div>
+<mat-card *ngIf="videoDetail" class="example-card">
+
+  <mat-card-content>
+    <div class="cont-flex">
+              <p>
+              {{videoDetail.items[0].snippet.title}}
+            </p>
+            <button (click)='updateFavoriteDetails();' mat-raised-button color="warn">{{(!isFav) ?'Add To Favoirtes' : 'Remove From Favoirtes'}}</button>
+
+          </div>
+          <mat-divider></mat-divider>
+<br>
+          <div class="cont-flex">
+            <span>Rate Now 
+            <span *ngFor="let in of [1,2,3,4,5];" (click)='rating = in; updateRatingDetails();' [class.checked]='rating>=in' class="fa fa-star"></span>
+            </span>
+            <span style="text-align: center">Duration {{videoDetail.items[0].contentDetails.duration | duration}}</span>
+            <span style="text-align: right"><mat-icon>remove_red_eye</mat-icon>
+               <span style="margin-right: 16px">{{videoDetail.items[0].statistics.viewCount}}</span>
+             <mat-icon>thumb_up</mat-icon> {{videoDetail.items[0].statistics.likeCount}}</span>
+          </div>
+          <mat-divider></mat-divider>
+<br>
+          <div class="cont-flex col-flex">
+            <p style="color:#f44336; font-weight: bold;">Published at {{videoDetail.items[0].snippet.publishedAt | date:medium}}</p>
+            <p>{{videoDetail.items[0].snippet.description}}</p>
+          </div>
+  <mat-divider></mat-divider>
+
+  </mat-card-content>
+
+</mat-card>

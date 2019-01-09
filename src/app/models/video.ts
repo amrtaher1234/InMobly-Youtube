@@ -1,15 +1,21 @@
 export class Video {
-    img: string;
-    title: string;
-    date: Date;
-    details: VideoDetail;
+    details: IVideoDetail;
+    id: IVideoId;
+    snippet: IVideoSnippet;
 }
 
-export interface VideoDetail {
-    likes: number;
-    dislikes: number;
-    rating?: number;
-    duration: string;
-    views: number;
+export interface IVideoDetail {
+    rating: number;
+    favorite: boolean;
+}
+interface IVideoId {
+    videId: string;
+    kind: string;
+}
+
+interface IVideoSnippet {
+    title: string;
+    publishedAt: Date;
     description: string;
+    thumbnails: any;
 }

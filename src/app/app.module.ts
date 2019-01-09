@@ -13,13 +13,18 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { ComponentsModule } from './components/components.module';
+// tslint:disable-next-line:import-spacing
+import { HttpClientModule }    from '@angular/common/http';
+import { DurationPipe } from './duration.pipe';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    DetailsComponent
+    DetailsComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,
@@ -27,6 +32,7 @@ import { ComponentsModule } from './components/components.module';
     BrowserAnimationsModule,
     MaterialModule,
     ComponentsModule,
+    HttpClientModule,
 
     // firebase init.
     AngularFireModule.initializeApp(environment.config),
