@@ -17,6 +17,8 @@ import { ComponentsModule } from './components/components.module';
 import { HttpClientModule }    from '@angular/common/http';
 import { DurationPipe } from './duration.pipe';
 
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { DurationPipe } from './duration.pipe';
     NavbarComponent,
     HomeComponent,
     DetailsComponent,
-    DurationPipe
+    DurationPipe,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,8 @@ import { DurationPipe } from './duration.pipe';
     MaterialModule,
     ComponentsModule,
     HttpClientModule,
+    FormsModule,
+
 
     // firebase init.
     AngularFireModule.initializeApp(environment.config),

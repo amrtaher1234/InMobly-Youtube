@@ -4,12 +4,12 @@
 <img src="http://www.inmobly.com/wp-content/uploads/2016/04/logo_Dark-1.png" alt="">
   <span class="example-spacer"></span>
 
-  <p>
+  <p *ngIf='global.showSearch'>
       <mat-form-field appearance="legacy">
         <!-- <mat-label>Legacy form field</mat-label> -->
         <!-- <mat-label><mat-icon>search</mat-icon></mat-label> -->
-        <mat-icon matSuffix>search</mat-icon>
-        <input matInput placeholder="search for video title">
+        <mat-icon  style="cursor: pointer;" (click)='search()' matSuffix>search</mat-icon>
+        <input [(ngModel)]='searchValue' matInput placeholder="search for video title">
         <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
     </p>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { YoutubeService } from '../firebase/youtube.service';
 import { DatabaseOperationsService } from '../firebase/database-operations';
 import { Video } from '../models/video';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-details',
@@ -16,7 +17,7 @@ export class DetailsComponent implements OnInit {
   isFav: boolean;
   videoId: string;
   Loading: boolean;
-  constructor(private youtube: YoutubeService,
+  constructor(private youtube: YoutubeService, private globals: GlobalsService,
     private databaseOps: DatabaseOperationsService,
     private activeRoute: ActivatedRoute) {
       this.rating = 0;
@@ -24,7 +25,9 @@ export class DetailsComponent implements OnInit {
     }
 
   ngOnInit() {
+  this.globals.showSearch = false;
     console.log('did i even open ?');
+    this.Loading = true;
     this.activeRoute.params.subscribe( async params => {
       console.log(params['videoId']);
       this.videoId = params['videoId'];
@@ -32,6 +35,7 @@ export class DetailsComponent implements OnInit {
       this.rating = video.details.rating;
       this.isFav = video.details.favorite;
       this.videoDetail = await this.youtube.getVideoDetail(this.videoId);
+    this.Loading = false;
       console.log(this.videoDetail);
     });
   }

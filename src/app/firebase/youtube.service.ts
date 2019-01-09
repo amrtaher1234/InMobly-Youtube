@@ -4,13 +4,14 @@ import { environment } from 'src/environments/environment.prod';
 import { IQueryShape, EOrderType } from '../models/query';
 import { Video, IVideoDetail } from '../models/video';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { promise } from 'protractor';
 import { DatabaseOperationsService } from './database-operations';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoutubeService {
+  searchSubject = new BehaviorSubject<string>(null);
   currentPageKey: string;
   previousPageKey: string;
   constructor(private http: HttpClient , private db: AngularFirestore
@@ -34,7 +35,6 @@ export class YoutubeService {
         console.log('breaking from the await loop');
         break;
       }
-      break;
       }
 
       videos.forEach(v => {v.details = {} as IVideoDetail; v.details.favorite = false; v.details.rating = -1; });

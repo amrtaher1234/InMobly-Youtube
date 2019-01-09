@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { YoutubeService } from '../firebase/youtube.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,16 +9,15 @@ import { YoutubeService } from '../firebase/youtube.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  searchValue: string;
+  showSearch = true;
+  constructor(public global: GlobalsService , private youtube: YoutubeService, private router: Router) { }
 
   ngOnInit() {
   }
-  keyDownFunction(event) {
-    if (event.keyCode === 13) {
-      // alert('you just clicked enter');
-      // rest of your code
-    }
+  search() {
+    // this.searchValueEmitter.emit(this.searchValue);
+    this.youtube.searchSubject.next(this.searchValue);
   }
 
 }

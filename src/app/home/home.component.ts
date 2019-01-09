@@ -6,7 +6,8 @@ import { DatabaseOperationsService } from '../firebase/database-operations';
 import { EOrderType } from '../models/query';
 import { MatSort } from '@angular/material/sort';
 import { YoutubeService } from '../firebase/youtube.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-home',
@@ -19,29 +20,46 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   Loading: boolean;
-  constructor(private router: Router , private databaseOps: DatabaseOperationsService , private youtube: YoutubeService) {
+  videos: Video[];
+  constructor(private route: ActivatedRoute, private global: GlobalsService,
+    private router: Router , private databaseOps: DatabaseOperationsService , private youtube: YoutubeService) {
     this.Loading = false;
    }
 
   async ngOnInit() {
-    let videos: Video[];
+  this.global.showSearch = true;
+
     this.Loading = true;
     if (localStorage.getItem('data')) {
       console.log('true');
-     videos = await this.databaseOps.getVideos({name : 'snippet.title' , orderType: EOrderType.asc});
+     this.videos = await this.databaseOps.getVideos({name : 'snippet.title' , orderType: EOrderType.asc});
     } else {
-      videos = await this.youtube.getVideoList() as Video[];
-      console.log('else' , videos);
+      this.videos = await this.youtube.getVideoList() as Video[];
+      console.log('else' , this.videos);
     }
-    this.dataSource = new MatTableDataSource<Video>(videos);
+    this.dataSource = new MatTableDataSource<Video>(this.videos);
     this.dataSource.sort = this.sort;
-    this.Loading = false;
     this.dataSource.paginator = this.paginator;
+
+    this.Loading = false;
+
+    this.youtube.searchSubject.subscribe(d => {
+    // getting the search value.
+      this.dataSource = new MatTableDataSource<Video>(this.filterVideos(d));
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+     } );
+
   }
 
   goToDetails(element) {
     this.router.navigate(['/details' , element.id.videoId]);
   }
-
+  filterVideos(str) {
+    if (str === '' || str === null || str === undefined) {
+      return this.videos;
+    }
+    return this.videos.filter(video => video.snippet.title.includes(str));
+  }
 }
 
